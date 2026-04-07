@@ -1,0 +1,17 @@
+# git ignore
+
+
+# Visual Studio
+.vs/
+
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
