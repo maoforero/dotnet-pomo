@@ -2,20 +2,33 @@
 {
     public class PomodoroSession
     {
-        public DateTime Now { get; private set; }
-        public int AmountTime { get; private set; }
-        public bool Alarm { get; private set; }
+        public int AmountOfSeconds { get; private set; }
+        public bool AlarmIsActive { get; private set; }
+        public DateTime TimeLimit { get; private set; }
 
-        public PomodoroSession(DateTime now, int timer, bool alarm)
+        public PomodoroSession(int timer, bool alarm)
         {
-            Now = now;
-            AmountTime = timer;
-            Alarm = alarm;
+            AmountOfSeconds = timer;
+            AlarmIsActive = alarm;
+            TimeLimit = DateTime.Now.AddSeconds(timer);
         }
 
-        public void ActivateAlarm(bool state)
+        public void TurnOffAlarm()
         {
-            Alarm = state;
+            AlarmIsActive = false;
+        }
+
+
+        public void UpdateTimeLimit(int timer)
+        {
+            AmountOfSeconds += AmountOfSeconds + timer;
+            TimeLimit = TimeLimit.AddSeconds(timer);
+        }
+
+        public void RestartSession(int newTimer)
+        {
+            AmountOfSeconds += AmountOfSeconds + newTimer;
+            TimeLimit = DateTime.Now.AddSeconds(newTimer);
         }
     }
 }
