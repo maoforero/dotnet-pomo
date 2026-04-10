@@ -21,14 +21,14 @@
 
         public void UpdateTimeLimit(int timer)
         {
-            AmountOfSeconds += AmountOfSeconds + timer;
+            AmountOfSeconds += timer;
             TimeLimit = TimeLimit.AddSeconds(timer);
         }
 
         public void RestartSession(int newTimer)
         {
-            AmountOfSeconds += AmountOfSeconds + newTimer;
-            TimeLimit = DateTime.Now.AddSeconds(newTimer);
+            AmountOfSeconds = newTimer;
+            TimeLimit = DateTime.Now.AddSeconds(AmountOfSeconds);
         }
     }
 }

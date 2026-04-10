@@ -1,27 +1,36 @@
-﻿namespace PomodoroTimer.Services
+﻿using PomodoroTimer.Models;
+
+namespace PomodoroTimer.Services
 {
     public class TimerService
     {
-        private CancellationTokenSource? cts;
+        private CancellationTokenSource? _cts;
+        private  PomodoroSession? _session;
 
-        public async Task StartAsync() 
+        public async Task StartAsync(int seconds, bool alarmState) 
         {
-
+            _session = new PomodoroSession(seconds, alarmState);
         }
 
-        public async Task RestartAsync()
+        public void Restart()
         {
-
+            ArgumentNullException.ThrowIfNull(_session);
         }
 
-        public async Task AddTimeAsync()
+        public void Cancel()
         {
-
+            ArgumentNullException.ThrowIfNull(_session);
         }
 
-        public async Task CancelAsync()
+        public async Task AddTimeAsync(int seconds)
         {
+            ArgumentNullException.ThrowIfNull(_session);
+            _session.UpdateTimeLimit(seconds);
+        }
 
+        public async Task DisableAlarm()
+        {
+            ArgumentNullException.ThrowIfNull(_session);
         }
     }
 }
