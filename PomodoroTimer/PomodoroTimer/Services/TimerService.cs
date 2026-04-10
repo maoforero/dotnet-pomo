@@ -12,25 +12,32 @@ namespace PomodoroTimer.Services
             _session = new PomodoroSession(seconds, alarmState);
         }
 
-        public void Restart()
+        public void Restart(int seconds)
         {
             ArgumentNullException.ThrowIfNull(_session);
+            ArgumentNullException.ThrowIfNull(_cts);
+            _cts.Cancel();
+            _session.RestartSession(seconds);
+            _session = new PomodoroSession(seconds, true);
+
         }
 
         public void Cancel()
         {
-            ArgumentNullException.ThrowIfNull(_session);
+            ArgumentNullException.ThrowIfNull(_cts);
+            _cts.Cancel();
         }
 
-        public async Task AddTimeAsync(int seconds)
+        public void AddTime(int seconds)
         {
             ArgumentNullException.ThrowIfNull(_session);
             _session.UpdateTimeLimit(seconds);
         }
 
-        public async Task DisableAlarm()
+        public void DisableAlarm()
         {
             ArgumentNullException.ThrowIfNull(_session);
+            _session.TurnOffAlarm();
         }
     }
 }
