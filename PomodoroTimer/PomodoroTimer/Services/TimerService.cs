@@ -7,6 +7,7 @@ namespace PomodoroTimer.Services
     {
         private CancellationTokenSource?   _cts;
         private PomodoroSession?           _session;
+         
 
         public bool IsCompleted { get; private set; }
 
@@ -64,5 +65,16 @@ namespace PomodoroTimer.Services
             ArgumentNullException.ThrowIfNull(_session);
             _session.TurnOffAlarm();
         }
+
+        public TimeSpan Remaining => _session is null
+            ? TimeSpan.Zero
+            : _session.TimeLimit - DateTime.Now;
+
+        public bool AlarmIsActive => _session is null
+            ? false : _session.AlarmIsActive;
+
+        public int TotalSeconds => _session is null
+            ? 0
+            : _session.AmountOfSeconds;
     }
 }
