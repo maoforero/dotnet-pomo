@@ -7,9 +7,9 @@
         void Cancel();
         void AddTime(int seconds);
         void DisableAlarm();
-        TimeSpan Remaining();
-        bool AlarmIsActive();
-        int TotalSeconds();
-        bool IsCompleted();
+        TimeSpan Remaining { get; }
+        bool AlarmIsActive { get; }
+        int TotalSeconds { get; }
+        bool IsCompleted { get; }
     }
 }
